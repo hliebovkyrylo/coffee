@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Coffee {
+  id                String            @id @default(auto()) @map("_id") @db.ObjectId
+  unitPurchasePrice Float
+  unitSalePrice     Float
+  quantity          Int
+  netWeight         Float
+  coffeeType        CoffeeType        @relation(fields: [coffeeTypeId], references: [id])
+  coffeeTypeId      String            @db.ObjectId
+  country           Country           @relation(fields: [countryId], references: [id])
+  countryId         String            @db.ObjectId
+  coffeeComposition CoffeeComposition @relation(fields: [compositionId], references: [id])
+  compositionId     String            @db.ObjectId
+}
+
+model CoffeeType {
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  name   String   @unique
+  Coffee Coffee[]
+}
+
+model CoffeeComposition {
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  name   String   @unique
+  Coffee Coffee[]
+}
+
+model Country {
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  name   String   @unique
+  Coffee Coffee[]
+}
