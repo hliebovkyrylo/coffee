@@ -6,3 +6,11 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+model Coffee {
+  id                String @id @default(auto()) @map("_id") @db.ObjectId
+  unitPurchasePrice Float
+  unitSalePrice     Float
+  quantity          Int
+  netWeight         Float
+}
