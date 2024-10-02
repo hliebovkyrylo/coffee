@@ -23,18 +23,18 @@ model Coffee {
 
 model CoffeeType {
   id     String   @id @default(auto()) @map("_id") @db.ObjectId
-  name   String
+  name   String   @unique
   Coffee Coffee[]
 }
 
 model CoffeeComposition {
   id     String   @id @default(auto()) @map("_id") @db.ObjectId
-  name   String
+  name   String   @unique
   Coffee Coffee[]
 }
 
 model Country {
   id     String   @id @default(auto()) @map("_id") @db.ObjectId
-  name   String
+  name   String   @unique
   Coffee Coffee[]
 }
