@@ -8,24 +8,33 @@ datasource db {
 }
 
 model Coffee {
-  id                String @id @default(auto()) @map("_id") @db.ObjectId
+  id                String            @id @default(auto()) @map("_id") @db.ObjectId
   unitPurchasePrice Float
   unitSalePrice     Float
   quantity          Int
   netWeight         Float
+  coffeeType        CoffeeType        @relation(fields: [coffeeTypeId], references: [id])
+  coffeeTypeId      String            @db.ObjectId
+  country           Country           @relation(fields: [countryId], references: [id])
+  countryId         String            @db.ObjectId
+  coffeeComposition CoffeeComposition @relation(fields: [compositionId], references: [id])
+  compositionId     String            @db.ObjectId
 }
 
 model CoffeeType {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  name   String
+  Coffee Coffee[]
 }
 
 model CoffeeComposition {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  name   String
+  Coffee Coffee[]
 }
 
 model Country {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  name   String
+  Coffee Coffee[]
 }
