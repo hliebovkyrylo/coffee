@@ -1,11 +1,11 @@
-import type { AppProps } from 'next/app';
-import "../styles/home-page.css";
+import type { AppProps } from "next/app";
 import "../styles/base.css";
+import { Layout } from "@/components/Layout";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="container">
+    <Layout>
       <Component {...pageProps} />
-    </div>
+    </Layout>
   );
 }
