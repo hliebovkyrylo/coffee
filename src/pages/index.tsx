@@ -1,18 +1,16 @@
+import React from 'react';
+import Header from './header';
+import HeadComp from './head';
 export default function Profile() {
   return (
     <div>
-     <Header/>
-     
-     
+      
+      <HeadComp />
+      <Header />
       
     </div>
   );
 }
 
-function Header(){
-  return(
-    <header className="header">
-    <p>Coffe</p> 
-    </header>
-  );
-}
+
+
