@@ -14,3 +14,8 @@ model Coffee {
   quantity          Int
   netWeight         Float
 }
+
+model CoffeeType {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+}
