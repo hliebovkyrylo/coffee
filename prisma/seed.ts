@@ -3,29 +3,31 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  await Promise.all([
-    // CoffeeType
-    prisma.coffeeType.upsert({
-      where: { name: "зерно" },
-      update: {},
-      create: { name: "зерно" },
-    }),
-    prisma.coffeeType.upsert({
-      where: { name: "молота" },
-      update: {},
-      create: { name: "молота" },
-    }),
-    // CoffeeComposition
-    prisma.coffeeComposition.upsert({
-      where: { name: "арабіка" },
-      update: {},
-      create: { name: "арабіка" },
-    }),
-    prisma.coffeeComposition.upsert({
-      where: { name: "робуста" },
-      update: {},
-      create: { name: "робуста" },
-    }),
+  const coffeeTypeData = [
+    { where: { name: "зерно" }, create: { name: "зерно" } },
+    { where: { name: "молота" }, create: { name: "молота" } },
+  ];
+
+  const coffeeCompositionData = [
+    { where: { name: "арабіка" }, create: { name: "арабіка" } },
+    { where: { name: "робуста" }, create: { name: "робуста" } },
+  ];
+
+  await prisma.$transaction([
+    ...coffeeTypeData.map((data) =>
+      prisma.coffeeType.upsert({
+        where: data.where,
+        update: {},
+        create: data.create,
+      })
+    ),
+    ...coffeeCompositionData.map((data) =>
+      prisma.coffeeComposition.upsert({
+        where: data.where,
+        update: {},
+        create: data.create,
+      })
+    ),
   ]);
 }
 
