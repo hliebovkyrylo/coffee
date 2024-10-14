@@ -9,6 +9,7 @@ datasource db {
 
 model Coffee {
   id            String            @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
   purchasePrice Float
   salePrice     Float
   quantity      Int
