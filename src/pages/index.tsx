@@ -1,14 +1,14 @@
 import { CoffeeList } from "@/components/CoffeeList";
-import { Filter } from "@/components/Layout/Filter";
-import { Sort } from "@/components/Layout/Sort";
+import { FilterPanel } from "@/components/FilterPanel";
+import { SortPanel } from "@/components/SortPanel";
 import { PageHeading } from "@/components/PageHeading";
 
 export default function Home() {
   return (
     <div>
       <PageHeading>Coffee Shop</PageHeading>
-      <Sort />
-      <Filter />
+      <SortPanel />
+      <FilterPanel />
       <CoffeeList />
     </div>
   );
