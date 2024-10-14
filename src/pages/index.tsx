@@ -1,3 +1,11 @@
+import { CoffeeList } from "@/components/CoffeeList";
+import { PageHeading } from "@/components/PageHeading";
+
 export default function Home() {
-  return <>Home page</>;
-};
+  return (
+    <div>
+      <PageHeading>Coffee Shop</PageHeading>
+      <CoffeeList />
+    </div>
+  );
+}
