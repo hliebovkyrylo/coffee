@@ -10,7 +10,8 @@ export default async function handler(
 
   try {
     if (req.method === "GET") {
-      const countries = await countryService.getAllCountries();
+      const { name } = req.query;
+      const countries = await countryService.getAllCountries(name as string | undefined);
       res.status(200).json(successResponse({ countries }));
     } else {
       res.status(405).json(errorResponse("Method not allowed", 405));
