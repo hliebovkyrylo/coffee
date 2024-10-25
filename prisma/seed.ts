@@ -1,8 +1,12 @@
 import { PrismaClient } from "@prisma/client";
+import fs from "fs";
+import path from "path";
 
 const prisma = new PrismaClient();
 
 async function main() {
+  const countryData = JSON.parse(fs.readFileSync(path.join("public", "countries.json"), "utf-8"))
+
   const coffeeTypeData = [
     { where: { name: "зерно" }, create: { name: "зерно" } },
     { where: { name: "молота" }, create: { name: "молота" } },
@@ -28,6 +32,13 @@ async function main() {
         create: data.create,
       })
     ),
+    ...countryData.map((data: { name: string }) => 
+      prisma.country.upsert({
+        where: { name: data.name },
+        update: {},
+        create: { name: data.name },
+      })
+    )
   ]);
 }
 
