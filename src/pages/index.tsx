@@ -1,3 +1,15 @@
+import { CoffeeList } from "@/components/CoffeeList";
+import { FilterPanel } from "@/components/FilterPanel";
+import { SortPanel } from "@/components/SortPanel";
+import { PageHeading } from "@/components/PageHeading";
+
 export default function Home() {
-  return <></>;
-};
+  return (
+    <div>
+      <PageHeading>Coffee Shop</PageHeading>
+      <FilterPanel />
+      <SortPanel />
+      <CoffeeList />
+    </div>
+  );
+}

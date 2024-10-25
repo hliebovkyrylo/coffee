@@ -1,36 +1,40 @@
 import React, { useEffect, useState } from "react";
-import styles from "@/styles/filter.module.css";
+import styles from "./FilterPanel.module.css";
 
-export const Filter = ({ onFilterChange }) => {
+export const FilterPanel = () => {
   const [coffeeTypes, setCoffeeTypes] = useState([]);
   const [coffeeBlends, setCoffeeBlends] = useState([]);
   const [countries, setCountries] = useState([]);
 
-  
   useEffect(() => {
-    fetch('/api/coffeeTypes')
+    fetch("/api/coffeeTypes")
       .then((res) => res.json())
       .then((data) => setCoffeeTypes(data));
-    
-    fetch('/api/coffeeBlends')
+
+    fetch("/api/coffeeBlends")
       .then((res) => res.json())
       .then((data) => setCoffeeBlends(data));
 
-    fetch('/api/countries')
+    fetch("/api/countries")
       .then((res) => res.json())
       .then((data) => setCountries(data));
   }, []);
 
-  const handleFilterChange = (e) => {
+  const handleFilterChange = (
+    e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
+  ) => {
     const { name, value } = e.target;
     onFilterChange(name, value);
   };
 
+  const onFilterChange = (name: string, value: string) => {};
+
   return (
     <div className={styles.filterPanel}>
-     
       <div className={styles.filterItem}>
-        <label htmlFor="name">Назва</label>
+        <label className={styles.filterItemLabel} htmlFor="name">
+          Назва
+        </label>
         <input
           type="text"
           id="name"
@@ -41,9 +45,10 @@ export const Filter = ({ onFilterChange }) => {
         />
       </div>
 
-   
       <div className={styles.filterItem}>
-        <label htmlFor="price">Ціна (продаж)</label>
+        <label className={styles.filterItemLabel} htmlFor="price">
+          Ціна (продаж)
+        </label>
         <input
           type="number"
           id="priceMin"
@@ -62,9 +67,10 @@ export const Filter = ({ onFilterChange }) => {
         />
       </div>
 
-     
       <div className={styles.filterItem}>
-        <label htmlFor="weight">Маса</label>
+        <label className={styles.filterItemLabel} htmlFor="weight">
+          Маса
+        </label>
         <input
           type="number"
           id="weightMin"
@@ -83,9 +89,10 @@ export const Filter = ({ onFilterChange }) => {
         />
       </div>
 
-   
       <div className={styles.filterItem}>
-        <label htmlFor="coffeeType">Вид кави</label>
+        <label className={styles.filterItemLabel} htmlFor="coffeeType">
+          Вид кави
+        </label>
         <select
           id="coffeeType"
           name="coffeeType"
@@ -101,9 +108,10 @@ export const Filter = ({ onFilterChange }) => {
         </select>
       </div>
 
-    
       <div className={styles.filterItem}>
-        <label htmlFor="coffeeBlend">Склад кави</label>
+        <label className={styles.filterItemLabel} htmlFor="coffeeBlend">
+          Склад кави
+        </label>
         <select
           id="coffeeBlend"
           name="coffeeBlend"
@@ -119,9 +127,10 @@ export const Filter = ({ onFilterChange }) => {
         </select>
       </div>
 
-      
       <div className={styles.filterItem}>
-        <label htmlFor="country">Країна-виробник</label>
+        <label className={styles.filterItemLabel} htmlFor="country">
+          Країна-виробник
+        </label>
         <select
           id="country"
           name="country"

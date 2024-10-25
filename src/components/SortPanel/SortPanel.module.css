@@ -2,32 +2,30 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: Arial, sans-serif;
-  background-color: #fff9db; 
+  background-color: #ffffff;
   padding: 8px;
   border-radius: 6px;
 }
 
 .sortLabel {
-  font-size: 14px;
-  color: #8a6d3b; 
+  color: #8a6d3b;
 }
 
 .sortSelect {
   padding: 8px 12px;
   font-size: 13px;
-  color: #8a6d3b; 
-  background-color: #fff4cc; 
-  border: 1px solid #e1c775;
+  color: #ffffff;
+  background-color: #363636;
+  border: 1px solid #696969;
   border-radius: 10px;
   cursor: pointer;
 }
 
 .sortSelect:hover {
-  background-color: #ffeb99; 
+  background-color: #292929;
 }
 
 .sortSelect:focus {
   outline: none;
-  box-shadow: 0 0 3px #e1c775; 
+  box-shadow: 0 0 3px #292929;
 }

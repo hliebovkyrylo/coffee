@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postinstall": "prisma generate",
     "start": "next start",
     "lint": "next lint",
     "prisma:seed": "ts-node prisma/seed.ts"
@@ -12,10 +13,12 @@
   "dependencies": {
     "@prisma/client": "^5.20.0",
     "@types/next": "^8.0.7",
+    "lucide-react": "^0.452.0",
     "next": "14.2.13",
     "prisma": "^5.20.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "vaul": "^1.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.16.10",
