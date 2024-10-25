@@ -7,8 +7,8 @@ export default function Home() {
   return (
     <div>
       <PageHeading>Coffee Shop</PageHeading>
-      <SortPanel />
       <FilterPanel />
+      <SortPanel />
       <CoffeeList />
     </div>
   );

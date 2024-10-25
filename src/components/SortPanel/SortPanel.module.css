@@ -1,43 +1,31 @@
 .sortMenu {
-  margin-top: 1rem;
   display: flex;
-  gap: 1rem;
   align-items: center;
+  gap: 10px;
+  background-color: #ffffff;
+  padding: 8px;
+  border-radius: 6px;
 }
 
-.sortButton {
-  padding: 0.5rem 1.2rem;
-  background: linear-gradient(145deg, #1e3a5f, #1a2f4b);
+.sortLabel {
+  color: #8a6d3b;
+}
+
+.sortSelect {
+  padding: 8px 12px;
+  font-size: 13px;
   color: #ffffff;
-  border: none;
-  border-radius: 30px;
-  font-weight: bold;
-  text-transform: uppercase;
+  background-color: #363636;
+  border: 1px solid #696969;
+  border-radius: 10px;
   cursor: pointer;
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2), -3px -3px 8px rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
 }
 
-.sortButton::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -50%;
-  width: 200%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.2);
-  transform: skewX(-30deg);
-  transition: all 0.5s ease;
+.sortSelect:hover {
+  background-color: #292929;
 }
 
-.sortButton:hover::before {
-  left: 150%;
-}
-
-.sortButton:hover {
-  background: linear-gradient(145deg, #1a2f4b, #102740);
-  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.3), -3px -3px 12px rgba(255, 255, 255, 0.1);
-  transform: scale(1.05);
+.sortSelect:focus {
+  outline: none;
+  box-shadow: 0 0 3px #292929;
 }

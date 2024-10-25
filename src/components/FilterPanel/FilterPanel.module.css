@@ -1,82 +1,62 @@
 .filterPanel {
-  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  background-color: #e0f0ff;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #ffffff;
+  padding: 0.5rem;
+  border-radius: 5px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  justify-content: flex-start;
 }
 
 .filterItem {
-  flex: 1 1 150px;
   display: flex;
   flex-direction: column;
+  gap: 0.2rem;
+  width: auto;
 }
 
-.label {
-  color: #1b2b40;
-  margin-bottom: 0.5rem;
+.filterItemLabel {
+  white-space: nowrap;
+  color: #8a6d3b;
 }
 
 .filterInput,
 .filterSelect {
-  padding: 0.4rem;
-  background-color: #cce0ff;
-  color: #000000;
-  border: none;
-  border-radius: 10px;
-  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.2),
-    inset -1px -1px 3px rgba(255, 255, 255, 0.1);
-  transition: background-color 0.3s ease;
+  padding: 0.2rem 0.3rem;
+  height: 36px;
+  font-size: 12px;
+  color: #ffffff;
+  background-color: #363636;
+  border: 1px solid #696969;
+  border-radius: 12px;
+  font-family: "Merriweather", serif;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.filterInput::placeholder {
-  color: #7a9cb4;
+.filterSelect {
+  cursor: pointer;
 }
 
 .filterInput:focus,
 .filterSelect:focus {
-  background-color: #99ccff;
   outline: none;
+  background-color: #292929;
+}
+
+.filterRange {
+  display: flex;
+  gap: 0.3rem;
 }
 
 .applyButton {
-  padding: 0.6rem 1.2rem;
-  background: linear-gradient(145deg, #99ccff, #80b3ff);
-  color: #000000;
-  border: none;
-  border-radius: 30px;
-  font-weight: bold;
-  text-transform: uppercase;
+  padding: 0.3rem 0.6rem;
+  font-size: 10px;
+  background-color: #f5d36b;
+  border: 1px solid #e1c775;
+  border-radius: 4px;
   cursor: pointer;
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2),
-    -3px -3px 8px rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.applyButton::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -50%;
-  width: 200%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.2);
-  transform: skewX(-30deg);
-  transition: all 0.5s ease;
-}
-
-.applyButton:hover::before {
-  left: 150%;
-}
-
-.applyButton:hover {
-  background: linear-gradient(145deg, #80b3ff, #66a3ff);
-  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.3),
-    -3px -3px 12px rgba(255, 255, 255, 0.1);
-  transform: scale(1.05);
+  white-space: nowrap;
 }
