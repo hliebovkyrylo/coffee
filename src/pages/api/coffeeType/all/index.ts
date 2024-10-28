@@ -8,14 +8,12 @@ export default async function handler(
 ) {
   const coffeeTypeService = new CoffeeTypeService();
 
-  if (req.method === "GET") {
-    try {
-      const coffeeTypes = await coffeeTypeService.getAllCoffeeTypes();
-      return res.status(200).json(successResponse(coffeeTypes));
-    } catch (error) {
-      return res.status(500).json(errorResponse("Internal server error", 500));
-    }
-  } else {
+  if (req.method !== "GET")
     return res.status(405).json(errorResponse("Method not allowed", 405));
+  try {
+    const coffeeTypes = await coffeeTypeService.getAllCoffeeTypes();
+    return res.status(200).json(successResponse(coffeeTypes));
+  } catch (error) {
+    return res.status(500).json(errorResponse("Internal server error", 500));
   }
 }
