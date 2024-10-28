@@ -1,6 +1,20 @@
 import { CoffeeService } from "@/lib/services/coffeeService";
 import { errorResponse, successResponse } from "@/lib/utils/apiResponse";
 import { NextApiRequest, NextApiResponse } from "next";
+import { z } from "zod";
+
+const coffeeFiltersSchema = z.object({
+  name: z.string().optional(),
+  salePriceMin: z.coerce.number().min(0).optional(),
+  salePriceMax: z.coerce.number().min(0).optional(),
+  netWeightMin: z.coerce.number().min(0).optional(),
+  netWeightMax: z.coerce.number().min(0).optional(),
+  type: z.string().optional(),
+  composition: z.string().optional(),
+  country: z.string().optional(),
+  sortBy: z.enum(["name", "salePrice"]).optional(),
+  sortOrder: z.enum(["asc", "desc"]).optional(),
+});
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,7 +24,15 @@ export default async function handler(
 
   try {
     if (req.method === "GET") {
-      const filters = parseFilters(req.query);
+      const validation = coffeeFiltersSchema.safeParse(req.query);
+
+      if (!validation.success) {
+        return res
+          .status(400)
+          .json(errorResponse("Invalid query parameters", 400));
+      }
+
+      const filters = validation.data;
 
       const coffees = await coffeeService.getAllCoffees(filters);
 
@@ -21,33 +43,4 @@ export default async function handler(
   } catch (error) {
     res.status(500).json(errorResponse("Internal server error", 500));
   }
-}
-
-function parseFilters(query: NextApiRequest["query"]) {
-  const {
-    name,
-    salePriceMin,
-    salePriceMax,
-    netWeightMin,
-    netWeightMax,
-    type,
-    composition,
-    country,
-    sortBy,
-    sortOrder,
-  } = query;
-
-  return {
-    name: name as string | undefined,
-    salePriceMin: salePriceMin ? Number(salePriceMin) : undefined,
-    salePriceMax: salePriceMax ? Number(salePriceMax) : undefined,
-    netWeightMin: netWeightMin ? Number(netWeightMin) : undefined,
-    netWeightMax: netWeightMax ? Number(netWeightMax) : undefined,
-    type: type as string | undefined,
-    composition: composition as string | undefined,
-    country: country as string | undefined,
-    sortBy: sortBy === "name" || sortBy === "salePrice" ? sortBy : undefined,
-    sortOrder:
-      sortOrder === "asc" || sortOrder === "desc" ? sortOrder : undefined,
-  } as const;
 }
