@@ -1,20 +1,7 @@
 import { CoffeeService } from "@/lib/services/coffeeService";
 import { errorResponse, successResponse } from "@/lib/utils/apiResponse";
+import { coffeeFiltersSchema } from "@/schemas/coffeeFiltersSchema";
 import { NextApiRequest, NextApiResponse } from "next";
-import { z } from "zod";
-
-const coffeeFiltersSchema = z.object({
-  name: z.string().optional(),
-  salePriceMin: z.coerce.number().min(0).optional(),
-  salePriceMax: z.coerce.number().min(0).optional(),
-  netWeightMin: z.coerce.number().min(0).optional(),
-  netWeightMax: z.coerce.number().min(0).optional(),
-  type: z.string().optional(),
-  composition: z.string().optional(),
-  country: z.string().optional(),
-  sortBy: z.enum(["name", "salePrice"]).optional(),
-  sortOrder: z.enum(["asc", "desc"]).optional(),
-});
 
 export default async function handler(
   req: NextApiRequest,
@@ -27,13 +14,10 @@ export default async function handler(
       const validation = coffeeFiltersSchema.safeParse(req.query);
 
       if (!validation.success) {
-        return res
-          .status(400)
-          .json(errorResponse("Invalid query parameters", 400));
+        return res.status(400).json(errorResponse("Invalid query parameters", 400));
       }
 
       const filters = validation.data;
-
       const coffees = await coffeeService.getAllCoffees(filters);
 
       res.status(200).json(successResponse(coffees));

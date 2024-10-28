@@ -1,11 +1,7 @@
 import { CountryService } from "@/lib/services/countryService";
 import { errorResponse, successResponse } from "@/lib/utils/apiResponse";
+import { countryQuerySchema } from "@/schemas/countryQuerySchema";
 import { NextApiRequest, NextApiResponse } from "next";
-import { z } from "zod";
-
-const countryQuerySchema = z.object({
-  name: z.string().optional(),
-});
 
 export default async function handler(
   req: NextApiRequest,
