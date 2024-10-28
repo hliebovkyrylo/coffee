@@ -1,18 +1,6 @@
+import { CoffeeFilters } from "@/schemas/coffeeFiltersSchema";
 import prisma from "../utils/db";
 import { Prisma } from "@prisma/client";
-
-interface CoffeeFilters {
-  name?: string;
-  salePriceMin?: number;
-  salePriceMax?: number;
-  netWeightMin?: number;
-  netWeightMax?: number;
-  type?: string;
-  composition?: string;
-  country?: string;
-  sortBy?: "name" | "salePrice";
-  sortOrder?: "asc" | "desc";
-}
 
 export class CoffeeService {
   async getAllCoffees(filters: CoffeeFilters) {
