@@ -14,7 +14,7 @@ export default async function handler(
 
       const coffees = await coffeeService.getAllCoffees(filters);
 
-      res.status(200).json(successResponse({ coffees }));
+      res.status(200).json(successResponse(coffees));
     } else {
       res.status(405).json(errorResponse("Method not allowed", 405));
     }
