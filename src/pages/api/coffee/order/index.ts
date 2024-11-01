@@ -1,7 +1,7 @@
 import { InsufficientError, NotFoundError } from "@/lib/errors";
 import { CoffeeService } from "@/lib/services/coffeeService";
 import { errorResponse, successResponse } from "@/lib/utils/apiResponse";
-import { orderItemSchema } from "@/schemas/orderSchema";
+import { orderItemsSchema } from "@/schemas/orderSchema";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -12,7 +12,7 @@ export default async function handler(
 
   if (req.method === "POST") {
     try {
-      const validation = orderItemSchema.safeParse(req.body);
+      const validation = orderItemsSchema.safeParse(req.body);
 
       if (!validation.success) {
         return res.status(400).json(errorResponse("Invalid body", 400));

@@ -1,8 +1,8 @@
 import { CoffeeFilters } from "@/schemas/coffeeFiltersSchema";
 import prisma from "../utils/db";
-import { Prisma, PrismaClient } from "@prisma/client";
-import { OrderItem, PurchasedCoffee } from "@/@types";
+import { Prisma } from "@prisma/client";
 import { InsufficientError, NotFoundError } from "../errors";
+import { OrderItem } from "@/schemas/orderSchema";
 
 export class CoffeeService {
   async getAllCoffees(filters: CoffeeFilters) {

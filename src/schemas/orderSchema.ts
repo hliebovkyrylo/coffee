@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const orderItemSchema = z
+export const orderItemsSchema = z
   .array(
     z.object({
       id: z.string().regex(/^[0-9a-f]{24}$/),
@@ -8,3 +8,5 @@ export const orderItemSchema = z
     })
   )
   .min(1);
+
+export type OrderItem = z.infer<typeof orderItemsSchema>[number];

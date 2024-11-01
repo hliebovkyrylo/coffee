@@ -1,8 +1,3 @@
-export interface OrderItem {
-  id: string;
-  quantity: number;
-}
-
 export interface PurchasedCoffee {
   id: string;
   name: string;
