@@ -33,11 +33,15 @@ export class CoffeeService {
       tx: Prisma.TransactionClient,
       item: OrderItem
     ) => {
-      const coffee = await tx.coffee.findFirst({ where: { name: item.name } });
-      if (!coffee) throw new NotFoundError(`Coffee '${item.name}' not found`);
+      const coffee = await tx.coffee.findUnique({
+        where: {
+          id: item.id
+        }
+      });
+      if (!coffee) throw new NotFoundError(`Coffee with ID '${item.id}' not found`);
       if (coffee.quantity < item.quantity)
         throw new InsufficientError(
-          `Insufficient stock for ${item.name}. Available: ${coffee.quantity} packages`
+          `Insufficient stock for ${coffee.name}. Available: ${coffee.quantity} packages`
         );
       return coffee;
     };
