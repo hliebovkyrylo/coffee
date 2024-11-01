@@ -31,7 +31,6 @@ export default async function handler(
         return res.status(400).json(errorResponse(error.message, 400));
       }
 
-      console.error("Order processing error:", error);
       return res.status(500).json(errorResponse("Internal server error", 500));
     }
   } else {
