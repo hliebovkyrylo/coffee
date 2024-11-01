@@ -30,7 +30,7 @@ export class CoffeeService {
     const purchasedCoffees: PurchasedCoffee[] = [];
 
     const getCoffeeAndValidateStock = async (
-      tx: PrismaClient,
+      tx: Prisma.TransactionClient,
       item: OrderItem
     ) => {
       const coffee = await tx.coffee.findFirst({ where: { name: item.name } });
@@ -43,7 +43,7 @@ export class CoffeeService {
     };
 
     try {
-      await prisma.$transaction(async (tx: any) => {
+      await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
         for (const item of orderItems) {
           const coffee = await getCoffeeAndValidateStock(tx, item);
 
