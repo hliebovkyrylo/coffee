@@ -1,6 +1,8 @@
 import { CoffeeFilters } from "@/schemas/coffeeFiltersSchema";
 import prisma from "../utils/db";
-import { Prisma } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
+import { OrderItem, PurchasedCoffee } from "@/@types";
+import { InsufficientError, NotFoundError } from "../errors";
 
 export class CoffeeService {
   async getAllCoffees(filters: CoffeeFilters) {
@@ -18,6 +20,51 @@ export class CoffeeService {
         orderBy: orderBy,
       });
       return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async processOrder(orderItems: OrderItem[]) {
+    let totalAmount = 0;
+    const purchasedCoffees: PurchasedCoffee[] = [];
+
+    const getCoffeeAndValidateStock = async (
+      tx: PrismaClient,
+      item: OrderItem
+    ) => {
+      const coffee = await tx.coffee.findFirst({ where: { name: item.name } });
+      if (!coffee) throw new NotFoundError(`Coffee '${item.name}' not found`);
+      if (coffee.quantity < item.quantity)
+        throw new InsufficientError(
+          `Insufficient stock for ${item.name}. Available: ${coffee.quantity} packages`
+        );
+      return coffee;
+    };
+
+    try {
+      await prisma.$transaction(async (tx: any) => {
+        for (const item of orderItems) {
+          const coffee = await getCoffeeAndValidateStock(tx, item);
+
+          totalAmount += coffee.purchasePrice * item.quantity;
+
+          await tx.coffee.update({
+            where: { id: coffee.id },
+            data: { quantity: { decrement: item.quantity } },
+          });
+
+          purchasedCoffees.push({
+            id: coffee.id,
+            name: coffee.name,
+            imageUrl: coffee.imageUrl,
+            quantity: item.quantity,
+            price: coffee.purchasePrice,
+          });
+        }
+      });
+
+      return { totalAmount, purchasedItems: purchasedCoffees };
     } catch (error) {
       throw error;
     }
