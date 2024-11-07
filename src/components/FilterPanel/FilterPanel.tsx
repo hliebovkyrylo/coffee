@@ -1,150 +1,55 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import styles from "./FilterPanel.module.css";
+import { CoffeeNameField } from "./components/CoffeeNameField";
+import { CoffeePriceRangeField } from "./components/CoffeePriceRangeField";
+import { CoffeeWeightRangeField } from "./components/CoffeeWeightRangeField";
+import { CoffeeTypeSelectField } from "./components/CoffeeTypeSelectField";
+import { CoffeeCompositionSelectField } from "./components/CoffeeCompositionSelectField";
+import { CoffeeCountrySelectField } from "./components/CoffeeCountrySelectField";
+import { CoffeeFilters } from "@/schemas/coffeeFiltersSchema";
 
-export const FilterPanel = () => {
-  const [coffeeTypes, setCoffeeTypes] = useState([]);
-  const [coffeeBlends, setCoffeeBlends] = useState([]);
-  const [countries, setCountries] = useState([]);
+interface FilterPanelProps {
+  filters: CoffeeFilters;
+  setFilters: Dispatch<SetStateAction<CoffeeFilters>>;
+}
 
-  useEffect(() => {
-    fetch("/api/coffeeTypes")
-      .then((res) => res.json())
-      .then((data) => setCoffeeTypes(data));
-
-    fetch("/api/coffeeBlends")
-      .then((res) => res.json())
-      .then((data) => setCoffeeBlends(data));
-
-    fetch("/api/countries")
-      .then((res) => res.json())
-      .then((data) => setCountries(data));
-  }, []);
-
-  const handleFilterChange = (
-    e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
-  ) => {
-    const { name, value } = e.target;
-    onFilterChange(name, value);
-  };
-
-  const onFilterChange = (name: string, value: string) => {};
+export const FilterPanel = ({ filters, setFilters }: FilterPanelProps) => {
+  const onFilterChange =
+    <Filter extends keyof CoffeeFilters>(key: Filter) =>
+    (value: CoffeeFilters[Filter]) => {
+      setFilters({ ...filters, [key]: value });
+    };
 
   return (
     <div className={styles.filterPanel}>
-      <div className={styles.filterItem}>
-        <label className={styles.filterItemLabel} htmlFor="name">
-          Назва
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          className={styles.filterInput}
-          placeholder="Введіть назву"
-          onChange={handleFilterChange}
-        />
-      </div>
-
-      <div className={styles.filterItem}>
-        <label className={styles.filterItemLabel} htmlFor="price">
-          Ціна (продаж)
-        </label>
-        <input
-          type="number"
-          id="priceMin"
-          name="priceMin"
-          className={styles.filterInput}
-          placeholder="Мін."
-          onChange={handleFilterChange}
-        />
-        <input
-          type="number"
-          id="priceMax"
-          name="priceMax"
-          className={styles.filterInput}
-          placeholder="Макс."
-          onChange={handleFilterChange}
-        />
-      </div>
-
-      <div className={styles.filterItem}>
-        <label className={styles.filterItemLabel} htmlFor="weight">
-          Маса
-        </label>
-        <input
-          type="number"
-          id="weightMin"
-          name="weightMin"
-          className={styles.filterInput}
-          placeholder="Мін."
-          onChange={handleFilterChange}
-        />
-        <input
-          type="number"
-          id="weightMax"
-          name="weightMax"
-          className={styles.filterInput}
-          placeholder="Макс."
-          onChange={handleFilterChange}
-        />
-      </div>
-
-      <div className={styles.filterItem}>
-        <label className={styles.filterItemLabel} htmlFor="coffeeType">
-          Вид кави
-        </label>
-        <select
-          id="coffeeType"
-          name="coffeeType"
-          className={styles.filterSelect}
-          onChange={handleFilterChange}
-        >
-          <option value="">Всі</option>
-          {coffeeTypes.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className={styles.filterItem}>
-        <label className={styles.filterItemLabel} htmlFor="coffeeBlend">
-          Склад кави
-        </label>
-        <select
-          id="coffeeBlend"
-          name="coffeeBlend"
-          className={styles.filterSelect}
-          onChange={handleFilterChange}
-        >
-          <option value="">Всі</option>
-          {coffeeBlends.map((blend) => (
-            <option key={blend} value={blend}>
-              {blend}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className={styles.filterItem}>
-        <label className={styles.filterItemLabel} htmlFor="country">
-          Країна-виробник
-        </label>
-        <select
-          id="country"
-          name="country"
-          className={styles.filterSelect}
-          onChange={handleFilterChange}
-        >
-          <option value="">Всі</option>
-          {countries.map((country) => (
-            <option key={country} value={country}>
-              {country}
-            </option>
-          ))}
-        </select>
-      </div>
+      <CoffeeNameField
+        value={filters.name || ""}
+        onChange={onFilterChange("name")}
+      />
+      <CoffeePriceRangeField
+        min={filters.salePriceMin}
+        max={filters.salePriceMax}
+        onChangeMin={onFilterChange("salePriceMin")}
+        onChangeMax={onFilterChange("salePriceMax")}
+      />
+      <CoffeeWeightRangeField
+        min={filters.netWeightMin}
+        max={filters.netWeightMax}
+        onChangeMin={onFilterChange("netWeightMin")}
+        onChangeMax={onFilterChange("netWeightMax")}
+      />
+      <CoffeeTypeSelectField
+        value={filters.type}
+        onChange={onFilterChange("type")}
+      />
+      <CoffeeCompositionSelectField
+        value={filters.composition}
+        onChange={onFilterChange("composition")}
+      />
+      <CoffeeCountrySelectField
+        value={filters.country}
+        onChange={onFilterChange("country")}
+      />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+
 export const coffeeFiltersSchema = z.object({
   name: z.string().optional(),
   salePriceMin: z.coerce.number().min(0).optional(),
@@ -14,3 +15,4 @@ export const coffeeFiltersSchema = z.object({
 });
 
 export type CoffeeFilters = z.infer<typeof coffeeFiltersSchema>;
+export type SortBy = CoffeeFilters['sortBy']

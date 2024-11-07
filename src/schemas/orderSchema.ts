@@ -9,4 +9,5 @@ export const orderItemsSchema = z
   )
   .min(1);
 
-export type OrderItem = z.infer<typeof orderItemsSchema>[number];
+export type OrderItems = z.infer<typeof orderItemsSchema>;
+export type OrderItem = OrderItems[number];

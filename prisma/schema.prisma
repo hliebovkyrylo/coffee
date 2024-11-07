@@ -3,12 +3,12 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgres"
   url      = env("DATABASE_URL")
 }
 
 model Coffee {
-  id            String            @id @default(auto()) @map("_id") @db.ObjectId
+  id            String            @id @default(uuid()) @map("_id")
   name          String
   purchasePrice Float
   salePrice     Float
@@ -16,27 +16,27 @@ model Coffee {
   netWeight     Float
   imageUrl      String
   type          CoffeeType        @relation(fields: [typeId], references: [id])
-  typeId        String            @db.ObjectId
+  typeId        String            
   country       Country           @relation(fields: [countryId], references: [id])
-  countryId     String            @db.ObjectId
+  countryId     String            
   composition   CoffeeComposition @relation(fields: [compositionId], references: [id])
-  compositionId String            @db.ObjectId
+  compositionId String           
 }
 
 model CoffeeType {
-  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  id     String   @id @default(uuid()) @map("_id")
   name   String   @unique
   Coffee Coffee[]
 }
 
 model CoffeeComposition {
-  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  id     String   @id @default(uuid()) @map("_id")
   name   String   @unique
   Coffee Coffee[]
 }
 
 model Country {
-  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  id     String   @id @default(uuid()) @map("_id")
   name   String   @unique
   Coffee Coffee[]
 }

@@ -1,7 +1,12 @@
 import { MinusIcon, PlusIcon } from "lucide-react";
 import styles from "./ShopBill.module.css";
+import { CoffeeWithQuantity } from "@/store/useCartStore";
 
-export const ShopBill = () => {
+interface ShopBillProps {
+  coffee: CoffeeWithQuantity
+}
+
+export const ShopBill = ({ coffee }: ShopBillProps) => {
   return (
     <div className={styles.billItem}>
       <img

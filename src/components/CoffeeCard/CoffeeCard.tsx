@@ -1,6 +1,11 @@
+import type { GetAllCoffeeResult } from "@/lib/services/coffeeService";
 import styles from "./CoffeeCard.module.css";
 
-export const CoffeeCard = () => {
+interface CoffeeCardProps {
+  coffee: GetAllCoffeeResult[number]
+}
+
+export const CoffeeCard = ({ coffee }: CoffeeCardProps) => {
   return (
     <div className={styles.productCard}>
       <img

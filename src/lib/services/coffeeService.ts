@@ -148,3 +148,5 @@ export class CoffeeService {
     return {};
   }
 }
+
+export type GetAllCoffeeResult = Prisma.PromiseReturnType<CoffeeService['getAllCoffees']>
