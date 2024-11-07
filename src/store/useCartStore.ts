@@ -16,9 +16,49 @@ export const cartStoreInitialState: UseCartStore = {
 };
 
 export const useCartStore = create(
-  combine(cartStoreInitialState, (set) => ({
-    add(coffee: GetAllCoffeeResult[number]) {},
-    remove(coffee: GetAllCoffeeResult[number]) {},
-    toggle(coffee: GetAllCoffeeResult[number]) {},
+  combine(cartStoreInitialState, (set, get) => ({
+    add(coffee: GetAllCoffeeResult[number]) {
+      const coffees = get().coffees;
+      const existingIndex = coffees.findIndex(
+        (value) => value.coffee.id === coffee.id
+      );
+
+      if (existingIndex === -1) {
+        return;
+      }
+
+      coffees[existingIndex].quantity += 1;
+
+      set({ coffees });
+    },
+    remove(coffee: GetAllCoffeeResult[number]) {
+      const coffees = get().coffees;
+      const existingIndex = coffees.findIndex(
+        (value) => value.coffee.id === coffee.id
+      );
+
+      if (existingIndex === -1) {
+        return;
+      }
+
+      coffees[existingIndex].quantity -= 1;
+
+      set({ coffees });
+    },
+    toggle(coffee: GetAllCoffeeResult[number]) {
+      const coffees = get().coffees;
+      const existingIndex = coffees.findIndex(
+        (value) => value.coffee.id === coffee.id
+      );
+      if (existingIndex === -1) {
+        return set({ coffees: coffees.concat({ coffee, quantity: 1 }) });
+      }
+      return set({
+        coffees: coffees.filter((existing) => existing.coffee.id !== coffee.id),
+      });
+    },
+    clear() {
+      set({ coffees: [] });
+    },
   }))
 );
