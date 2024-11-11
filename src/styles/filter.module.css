@@ -1,62 +1,78 @@
-
 .filterPanel {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: #fff9db;
-    padding: 0.5rem;
-    border-radius: 5px;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-    justify-content: flex-start;
-  }
-  
-  .filterItem {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    width: auto;
-  }
-  
-  .filterItem label {
-    font-size: 10px;
-    color: #8a6d3b;
-    white-space: nowrap; 
-  }
-  
-  .filterInput, .filterSelect {
-    padding: 0.2rem 0.3rem;
-    font-size: 10px;
-    color: #8a6d3b;
-    background-color: #fff4cc;
-    border: 1px solid #e1c775;
-    border-radius: 3px;
-    width: 100px; 
-    box-sizing: border-box;
-  }
-  
-  .filterSelect {
-    cursor: pointer;
-  }
-  
-  .filterInput:focus, .filterSelect:focus {
-    outline: none;
-    box-shadow: 0 0 2px #d9b44a;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #2b2b2b;
+  padding: 16px;
+  border-radius: 8px;
+  color: #ffd966; 
+  max-width: 300px;
+}
 
-  .filterRange {
-    display: flex;
-    gap: 0.3rem;
-  }
-  
-  .applyButton {
-    padding: 0.3rem 0.6rem;
-    font-size: 10px;
-    background-color: #f5d36b;
-    border: 1px solid #e1c775;
-    border-radius: 4px;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  
+.filterInput,
+.filterSelect {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  color: #ffd966;
+  background-color: #3a3a3a;
+  border: 1px solid #ffd966; 
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.filterInput::placeholder,
+.filterSelect::placeholder {
+  color: #ffea9e;
+}
+
+.filterInput:focus,
+.filterSelect:focus {
+  border-color: #ffe066;
+}
+
+.sliderContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rangeWrapper {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.rangeWrapper input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: #757575;
+  outline: none;
+  opacity: 0.9;
+  border-radius: 2px;
+}
+
+.rangeWrapper input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background-color: #ffd966;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.rangeWrapper input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background-color: #ffd966; 
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.rangeWrapper input[type="range"]:focus {
+  background: #666666; 
+}
