@@ -9,8 +9,8 @@ export const coffeeFiltersSchema = z.object({
   type: z.string().optional(),
   composition: z.string().optional(),
   country: z.string().optional(),
-  sortBy: z.enum(["name", "salePrice"]).optional(),
-  sortOrder: z.enum(["asc", "desc"]).optional(),
+  sortBy: z.enum(["name", "price", ""]).optional(),
+  sortOrder: z.enum(["asc", "desc", ""]).optional(),
 });
 
 export type CoffeeFilters = z.infer<typeof coffeeFiltersSchema>;
