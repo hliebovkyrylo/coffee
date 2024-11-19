@@ -7,8 +7,8 @@ interface CoffeeNameFieldProps {
 
 export const CoffeeNameField = ({ value, onChange }: CoffeeNameFieldProps) => {
   return (
-    <div className={styles.filterItem}>
-      <label className={styles.filterItemLabel} htmlFor="name">
+    <div className={styles.filterField}>
+      <label className={styles.filterLabel} htmlFor="name">
         Назва
       </label>
       <input

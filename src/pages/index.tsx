@@ -28,8 +28,10 @@ export default function Home() {
           setFilters({ ...filters, sortBy: sortBy as SortBy })
         }
       />
-      <FilterPanel filters={filters} setFilters={setFilters} />
-
+      <FilterPanel
+        filters={filters}
+        setFilters={setFilters}
+      />
       <CoffeeList data={data} />
     </div>
   );
