@@ -8,6 +8,7 @@ import { CoffeeCompositionDropdown } from "./components/CoffeeCompositionDropdow
 import { CoffeeCountryDropdown } from "./components/CoffeeCountryDropdown";
 import { CoffeeNameField } from "./components/CoffeeNameField";
 import { CoffeePriceSlider } from "./components/CoffeePriceSlider";
+import { CoffeeWeightSlider } from "./components/CoffeeWeightSlider/CoffeeWeightSlider";
 
 interface FilterPanelProps {
   filters: CoffeeFilters;
@@ -34,8 +35,8 @@ export const FilterPanel = ({ filters, setFilters }: FilterPanelProps) => {
           }))
         }
       />
-      <CoffeePriceSlider
-        value={[filters.netWeightMin ?? 0, filters.netWeightMax ?? 100]}
+      <CoffeeWeightSlider
+        value={[filters.netWeightMin ?? 0, filters.netWeightMax ?? 500]}
         onChange={(value) =>
           setFilters((prev) => ({
             ...prev,
