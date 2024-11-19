@@ -1,5 +1,5 @@
 import React from "react";
-
+import Dropdown from "react-dropdown";
 import styles from "./SortPanel.module.css";
 
 interface SortPanelProps {
@@ -9,32 +9,30 @@ interface SortPanelProps {
 }
 
 export const SortPanel = ({ sortBy, sortOrder, onChange }: SortPanelProps) => {
-  const handleSortByChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onChange(e.target.value, sortOrder || "asc");
-  };
-
-  const handleSortOrderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onChange(sortBy || "name", e.target.value);
-  };
-
   return (
     <div className={styles.sortMenu}>
-      <select
-        className={styles.sortSelect}
+      <Dropdown
+        options={[
+          { label: "За ціною", value: "price" },
+          { label: "За назвою", value: "name" },
+        ]}
         value={sortBy}
-        onChange={handleSortByChange}
-      >
-        <option value="name">За назвою</option>
-        <option value="price">За ціною</option>
-      </select>
-      <select
-        className={styles.sortSelect}
+        placeholder={"Сортувати за"}
+        controlClassName={styles.dropdownControl}
+        onChange={(e) => onChange(e.value, sortOrder ? sortOrder : "")}
+        menuClassName={styles.dropdownMenu}
+      />
+      <Dropdown
+        options={[
+          { label: "За зростанням", value: "asc" },
+          { label: "За спаданням", value: "desc" },
+        ]}
         value={sortOrder}
-        onChange={handleSortOrderChange}
-      >
-        <option value="asc">За зростанням</option>
-        <option value="desc">За спаданням</option>
-      </select>
+        placeholder={"Виберіть порядок"}
+        onChange={(e) => onChange(sortBy ? sortBy : "", e.value)}
+        controlClassName={styles.dropdownControl}
+        menuClassName={styles.dropdownMenu}
+      />
     </div>
   );
 };
