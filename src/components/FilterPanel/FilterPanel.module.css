@@ -43,9 +43,11 @@
 
 .sliderValues {
   display: flex;
+  width: 20px;
   justify-content: space-between;
   font-size: 12px;
   margin-top: 5px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, monospace;
 }
 
 .dropdown {
