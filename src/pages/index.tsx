@@ -35,8 +35,10 @@ export default function Home() {
           })
         }
       />
-      <FilterPanel filters={filters} setFilters={setFilters} />
-      <CoffeeList data={data} />
+      <div className="homeContent">
+        <FilterPanel filters={filters} setFilters={setFilters} />
+        <CoffeeList data={data} />
+      </div>
     </div>
   );
 }

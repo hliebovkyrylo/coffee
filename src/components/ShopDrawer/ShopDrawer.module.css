@@ -5,6 +5,7 @@
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.4); /* bg-black/40 */
+  z-index: 1;
 }
 
 .content {

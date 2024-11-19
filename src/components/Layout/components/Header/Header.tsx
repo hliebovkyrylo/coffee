@@ -10,7 +10,7 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <div className={styles.logo}>Coffee</div>
+        <div className={styles.logo}>Coffee Shop</div>
         <div className={styles.right_section}>
           <ShopDrawer>
             <button className={styles.shopping_cart}>

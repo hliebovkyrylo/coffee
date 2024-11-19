@@ -30,7 +30,7 @@ export const CoffeeCard = ({ coffee }: CoffeeCardProps) => {
           Склад кави: {coffee.composition.name}
         </p>
         <div className={styles.productFooter}>
-          <span className={styles.price}>€{coffee.purchasePrice}</span>
+          <span className={styles.price}>€{coffee.salePrice}</span>
           {coffee.quantity !== 0 ? (
             <button onClick={() => cart.toggle(coffee)}>
               {isAdded ? "Remove from cart" : "Add to cart"}
