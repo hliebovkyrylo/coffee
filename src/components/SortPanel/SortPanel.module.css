@@ -1,38 +1,15 @@
 .sortMenu {
   display: flex;
+  gap: 12px;
   align-items: center;
-  gap: 10px;
-  background-color: #fff8e1; 
-  padding: 8px 12px;
-  border-radius: 6px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-  max-width: 300px; 
-  margin-left: 0; 
-}
-
-.sortLabel {
-  font-size: 14px;
-  color: #8a6d3b;
-  font-weight: 500;
+  justify-content: flex-end;
 }
 
 .sortSelect {
-  padding: 6px 10px;
-  font-size: 13px;
-  color: #ffffff;
-  background-color: #8a6d3b; 
-  border: 1px solid #8a6d3b;
-  border-radius: 6px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  font-size: 14px;
   cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.sortSelect:hover {
-  background-color: #72592d; 
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-}
-
-.sortSelect:focus {
-  outline: none;
-  box-shadow: 0 0 5px #8a6d3b;
 }

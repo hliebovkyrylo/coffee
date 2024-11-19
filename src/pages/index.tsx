@@ -22,13 +22,14 @@ export default function Home() {
   return (
     <div>
       <PageHeading>Coffee Shop</PageHeading>
-      <FilterPanel filters={filters} setFilters={setFilters} />
       <SortPanel
         sortBy={filters.sortBy}
         onChange={(sortBy) =>
           setFilters({ ...filters, sortBy: sortBy as SortBy })
         }
       />
+      <FilterPanel filters={filters} setFilters={setFilters} />
+
       <CoffeeList data={data} />
     </div>
   );

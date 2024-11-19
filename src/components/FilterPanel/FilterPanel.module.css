@@ -1,54 +1,96 @@
 .filterPanel {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); 
-  gap: 16px;
-  padding: 16px;
-  background-color: #fff8e1; 
-  border-radius: 8px;
-  max-width: 600px;
-  margin-left: 0;
-  margin-bottom: 15px;
-  margin-top: 15px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  background-color: #fdf5e6; 
+  border-radius: 10px; 
+  padding: 20px;
+  width: 250px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .filterField {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  min-width: 130px; 
+  margin-bottom: 20px;
 }
 
-.filterGroup {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.filterPanel label {
-  font-size: 12px;
-  color: #5c5c5c;
-}
-
-.filterPanel input,
-.filterPanel select {
-  padding: 4px 8px;
-  border: 1px solid #ffd54f;
-  border-radius: 4px;
+.filterLabel {
+  display: block;
+  margin-bottom: 10px;
   font-size: 14px;
-  width: 100%; 
-  transition: border-color 0.3s ease;
+  font-weight: bold;
+  color: #4a4a4a;
 }
 
-.filterPanel input:focus,
-.filterPanel select:focus {
-  outline: none;
-  border-color: #fbc02d;
-  background-color: #fff3e0;
+.filterInput {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-.rangeInputs {
+.slider {
+  margin-top: 10px;
+}
+
+.sliderValues {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.dropdown {
+  width: 100%;
+}
+
+.dropdownControl {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px;
+  font-size: 14px;
+  color: #4a4a4a;
+  cursor: pointer;
+}
+
+.dropdownMenu {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
+  z-index: 1000;
+}
+
+.dropdownControl:hover,
+.filterInput:focus {
+  border-color: #ffd700; 
+  outline: none;
+}
+
+.dropdownMenu .Dropdown-option:hover {
+  background-color: #f9e7c9; 
+}
+
+.rc-slider-track {
+  background-color: #ffd700; 
+  height: 5px;
+}
+
+.rc-slider-handle {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ffd700;
+  background-color: white;
+  cursor: pointer;
+}
+
+.rc-slider-handle:focus {
+  border-color: #ffbf00; 
+  box-shadow: 0 0 5px #ffbf00;
+}
+
+.rc-slider-rail {
+  background-color: #ddd;
+  height: 5px;
 }

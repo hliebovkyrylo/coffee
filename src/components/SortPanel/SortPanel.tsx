@@ -1,23 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
 
 import styles from "./SortPanel.module.css";
 
 interface SortPanelProps {
-  sortBy?: string
-  onChange: (sortBy: string) => void
+  sortBy?: string;
+  sortOrder?: string;
+  onChange: (sortBy: string, sortOrder: string) => void;
 }
 
-export const SortPanel = ({ sortBy, onChange }: SortPanelProps) => {
+export const SortPanel = ({ sortBy, sortOrder, onChange }: SortPanelProps) => {
+  const handleSortByChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    onChange(e.target.value, sortOrder || "asc");
+  };
+
+  const handleSortOrderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    onChange(sortBy || "name", e.target.value);
+  };
+
   return (
     <div className={styles.sortMenu}>
-      <label className={styles.sortLabel}>Sort by:</label>
       <select
         className={styles.sortSelect}
         value={sortBy}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={handleSortByChange}
       >
-        <option value="name">Name (from highest to lowest)</option>
-        <option value="price">Price (sale) (highest to lowest)</option>
+        <option value="name">За назвою</option>
+        <option value="price">За ціною</option>
+      </select>
+      <select
+        className={styles.sortSelect}
+        value={sortOrder}
+        onChange={handleSortOrderChange}
+      >
+        <option value="asc">За зростанням</option>
+        <option value="desc">За спаданням</option>
       </select>
     </div>
   );
