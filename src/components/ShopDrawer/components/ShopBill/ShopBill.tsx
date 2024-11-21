@@ -1,23 +1,41 @@
 import { MinusIcon, PlusIcon } from "lucide-react";
 import styles from "./ShopBill.module.css";
+import { CoffeeWithQuantity, useCartStore } from "@/store/useCartStore";
 
-export const ShopBill = () => {
+interface ShopBillProps {
+  coffee: CoffeeWithQuantity;
+}
+
+export const ShopBill = ({ coffee }: ShopBillProps) => {
+  const cart = useCartStore();
+
   return (
     <div className={styles.billItem}>
-      <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTImuKSsVkRpgL6uyGAOl7_pFrRcZoqX3qkrw&s"
-        alt="Caramel Frappuccino"
-      />
+      <img src={coffee.coffee.imageUrl} alt={coffee.coffee.name} />
       <div className={styles.itemDetails}>
         <div>
-          <div className={styles.name}>Caramel Frappuccino</div>
+          <div className={styles.name}>{coffee.coffee.name}</div>
           <div className={styles.count}>
-            <div>1</div>
-            <button className={styles.minus}>-</button>
-            <button className={styles.plus}>+</button>
+            <div>{coffee.quantity}</div>
+            <button
+              disabled={coffee.quantity <= 1}
+              onClick={() => cart.remove(coffee.coffee)}
+              className={styles.minus}
+            >
+              -
+            </button>
+            <button
+              disabled={coffee.quantity >= coffee.coffee.quantity}
+              onClick={() => cart.add(coffee.coffee)}
+              className={styles.plus}
+            >
+              +
+            </button>
           </div>
         </div>
-        <div className={styles.price}>$3,95</div>
+        <div className={styles.price}>
+          ${coffee.quantity * coffee.coffee.purchasePrice}
+        </div>
       </div>
     </div>
   );

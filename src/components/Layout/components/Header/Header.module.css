@@ -19,13 +19,13 @@
 
 .logo {
   font-weight: 600;
-  font-size: 18px;
+  font-size: 24px;
   width: 100%;
   letter-spacing: 0.25em;
   color: #0c0c0c;
   display: block;
   padding: 8px 0;
-  font-family: "Rubik Mono One", monospace;
+  font-family: "Inspiration", cursive;
 }
 
 .header_nav {

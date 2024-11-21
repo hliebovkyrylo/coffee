@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inspiration&family=Pixelify+Sans:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inspiration&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&display=swap');
 *,
 *::before,
 *::after {
@@ -64,7 +64,7 @@ button:active {
 }
 
 body {
-  font-family: "Merriweather", serif;
+  font-family: "Inter", serif;
   font-weight: 400;
   font-style: normal;
   background-color: #f6eee4;
@@ -75,6 +75,11 @@ body {
   width: 100%;
   margin: 0 auto;
   padding: 24px;
+}
+
+.homeContent {
+  display: flex;
+  gap: 24px;
 }
 
 .rubik-mono-one-regular {

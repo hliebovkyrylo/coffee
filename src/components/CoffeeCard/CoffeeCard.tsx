@@ -1,22 +1,43 @@
+import type { GetAllCoffeeResult } from "@/lib/services/coffeeService";
 import styles from "./CoffeeCard.module.css";
+import { useCartStore } from "@/store/useCartStore";
+import { useMemo } from "react";
 
-export const CoffeeCard = () => {
+interface CoffeeCardProps {
+  coffee: GetAllCoffeeResult[number];
+}
+
+export const CoffeeCard = ({ coffee }: CoffeeCardProps) => {
+  const cart = useCartStore();
+
+  const isAdded = useMemo(
+    () =>
+      !!cart.coffees.find((cartCoffee) => cartCoffee.coffee.id === coffee.id),
+    [cart, coffee]
+  );
+
   return (
     <div className={styles.productCard}>
       <img
-        src="https://img.freepik.com/premium-photo/white-cup-coffee-coffee-beans-black-background_198067-1042376.jpg?semt=ais_hybrid"
-        alt={"Brazil Sitio Penha 250g"}
+        src={coffee.imageUrl}
+        alt={coffee.name}
         className={styles.productImage}
       />
       <div className={styles.productDetails}>
-        <h3 className={styles.productName}>{"Brazil Sitio Penha 250g"}</h3>
-        <p className={styles.productRoast}>{"Espresso roast"}</p>
+        <h3 className={styles.productName}>{coffee.name}</h3>
+        <p className={styles.productRoast}>{coffee.type.name}</p>
         <p className={styles.flavorProfile}>
-          Flavor Profile: {"toffee & milk chocolate, red apple, orange zest"}
+          Склад кави: {coffee.composition.name}
         </p>
         <div className={styles.productFooter}>
-          <span className={styles.price}>€4</span>
-          <button>Add to cart</button>
+          <span className={styles.price}>€{coffee.salePrice}</span>
+          {coffee.quantity !== 0 ? (
+            <button onClick={() => cart.toggle(coffee)}>
+              {isAdded ? "Remove from cart" : "Add to cart"}
+            </button>
+          ) : (
+            "Not available"
+          )}
         </div>
       </div>
     </div>

@@ -1,16 +1,17 @@
+import type { GetAllCoffeeResult } from "@/lib/services/coffeeService";
 import { CoffeeCard } from "../CoffeeCard";
 import styles from "./CoffeeList.module.css";
 
-export const CoffeeList = () => {
+interface CoffeeListProps {
+  data: GetAllCoffeeResult;
+}
+
+export const CoffeeList = ({ data }: CoffeeListProps) => {
   return (
     <div className={styles.container}>
-      <CoffeeCard />
-      <CoffeeCard />
-      <CoffeeCard />
-      <CoffeeCard />
-      <CoffeeCard />
-      <CoffeeCard />
-      <CoffeeCard />
+      {data.map((coffee) => (
+        <CoffeeCard coffee={coffee} key={coffee.id} />
+      ))}
     </div>
   );
 };

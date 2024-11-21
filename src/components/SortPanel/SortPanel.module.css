@@ -1,31 +1,26 @@
 .sortMenu {
   display: flex;
+  gap: 12px;
   align-items: center;
-  gap: 10px;
-  background-color: #ffffff;
-  padding: 8px;
-  border-radius: 6px;
-}
-
-.sortLabel {
-  color: #8a6d3b;
+  justify-content: flex-end;
 }
 
 .sortSelect {
-  padding: 8px 12px;
-  font-size: 13px;
-  color: #ffffff;
-  background-color: #363636;
-  border: 1px solid #696969;
-  border-radius: 10px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  font-size: 14px;
   cursor: pointer;
 }
 
-.sortSelect:hover {
-  background-color: #292929;
+.dropdownControl {
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-.sortSelect:focus {
-  outline: none;
-  box-shadow: 0 0 3px #292929;
+.dropdownMenu {
+  margin-top: 4px;
+  border-radius: 8px;
 }

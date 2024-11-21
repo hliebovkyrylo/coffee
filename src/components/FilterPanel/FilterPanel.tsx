@@ -1,150 +1,62 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
+import "react-dropdown/style.css";
+import "rc-slider/assets/index.css";
 import styles from "./FilterPanel.module.css";
+import { CoffeeFilters } from "@/schemas/coffeeFiltersSchema";
+import { CoffeeTypeDropdown } from "./components/CoffeeTypeDropdown";
+import { CoffeeCompositionDropdown } from "./components/CoffeeCompositionDropdown";
+import { CoffeeCountryDropdown } from "./components/CoffeeCountryDropdown";
+import { CoffeeNameField } from "./components/CoffeeNameField";
+import { CoffeePriceSlider } from "./components/CoffeePriceSlider";
+import { CoffeeWeightSlider } from "./components/CoffeeWeightSlider/CoffeeWeightSlider";
 
-export const FilterPanel = () => {
-  const [coffeeTypes, setCoffeeTypes] = useState([]);
-  const [coffeeBlends, setCoffeeBlends] = useState([]);
-  const [countries, setCountries] = useState([]);
+interface FilterPanelProps {
+  filters: CoffeeFilters;
+  setFilters: Dispatch<SetStateAction<CoffeeFilters>>;
+}
 
-  useEffect(() => {
-    fetch("/api/coffeeTypes")
-      .then((res) => res.json())
-      .then((data) => setCoffeeTypes(data));
-
-    fetch("/api/coffeeBlends")
-      .then((res) => res.json())
-      .then((data) => setCoffeeBlends(data));
-
-    fetch("/api/countries")
-      .then((res) => res.json())
-      .then((data) => setCountries(data));
-  }, []);
-
-  const handleFilterChange = (
-    e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
-  ) => {
-    const { name, value } = e.target;
-    onFilterChange(name, value);
-  };
-
-  const onFilterChange = (name: string, value: string) => {};
+export const FilterPanel = ({ filters, setFilters }: FilterPanelProps) => {
+  const onFilterChange =
+    <Filter extends keyof CoffeeFilters>(key: Filter) =>
+    (value: CoffeeFilters[Filter]) => {
+      setFilters({ ...filters, [key]: value });
+    };
 
   return (
     <div className={styles.filterPanel}>
-      <div className={styles.filterItem}>
-        <label className={styles.filterItemLabel} htmlFor="name">
-          Назва
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          className={styles.filterInput}
-          placeholder="Введіть назву"
-          onChange={handleFilterChange}
-        />
-      </div>
-
-      <div className={styles.filterItem}>
-        <label className={styles.filterItemLabel} htmlFor="price">
-          Ціна (продаж)
-        </label>
-        <input
-          type="number"
-          id="priceMin"
-          name="priceMin"
-          className={styles.filterInput}
-          placeholder="Мін."
-          onChange={handleFilterChange}
-        />
-        <input
-          type="number"
-          id="priceMax"
-          name="priceMax"
-          className={styles.filterInput}
-          placeholder="Макс."
-          onChange={handleFilterChange}
-        />
-      </div>
-
-      <div className={styles.filterItem}>
-        <label className={styles.filterItemLabel} htmlFor="weight">
-          Маса
-        </label>
-        <input
-          type="number"
-          id="weightMin"
-          name="weightMin"
-          className={styles.filterInput}
-          placeholder="Мін."
-          onChange={handleFilterChange}
-        />
-        <input
-          type="number"
-          id="weightMax"
-          name="weightMax"
-          className={styles.filterInput}
-          placeholder="Макс."
-          onChange={handleFilterChange}
-        />
-      </div>
-
-      <div className={styles.filterItem}>
-        <label className={styles.filterItemLabel} htmlFor="coffeeType">
-          Вид кави
-        </label>
-        <select
-          id="coffeeType"
-          name="coffeeType"
-          className={styles.filterSelect}
-          onChange={handleFilterChange}
-        >
-          <option value="">Всі</option>
-          {coffeeTypes.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className={styles.filterItem}>
-        <label className={styles.filterItemLabel} htmlFor="coffeeBlend">
-          Склад кави
-        </label>
-        <select
-          id="coffeeBlend"
-          name="coffeeBlend"
-          className={styles.filterSelect}
-          onChange={handleFilterChange}
-        >
-          <option value="">Всі</option>
-          {coffeeBlends.map((blend) => (
-            <option key={blend} value={blend}>
-              {blend}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className={styles.filterItem}>
-        <label className={styles.filterItemLabel} htmlFor="country">
-          Країна-виробник
-        </label>
-        <select
-          id="country"
-          name="country"
-          className={styles.filterSelect}
-          onChange={handleFilterChange}
-        >
-          <option value="">Всі</option>
-          {countries.map((country) => (
-            <option key={country} value={country}>
-              {country}
-            </option>
-          ))}
-        </select>
-      </div>
+      <CoffeeNameField value={filters.name} onChange={onFilterChange("name")} />
+      <CoffeePriceSlider
+        value={[filters.salePriceMin ?? 0, filters.salePriceMax ?? 100]}
+        onChange={(value) =>
+          setFilters((prev) => ({
+            ...prev,
+            salePriceMin: value[0],
+            salePriceMax: value[1],
+          }))
+        }
+      />
+      <CoffeeWeightSlider
+        value={[filters.netWeightMin ?? 0, filters.netWeightMax ?? 500]}
+        onChange={(value) =>
+          setFilters((prev) => ({
+            ...prev,
+            netWeightMin: value[0],
+            netWeightMax: value[1],
+          }))
+        }
+      />
+      <CoffeeTypeDropdown
+        value={filters.type}
+        onChange={onFilterChange("type")}
+      />
+      <CoffeeCompositionDropdown
+        value={filters.composition}
+        onChange={onFilterChange("composition")}
+      />
+      <CoffeeCountryDropdown
+        value={filters.country}
+        onChange={onFilterChange("country")}
+      />
     </div>
   );
 };

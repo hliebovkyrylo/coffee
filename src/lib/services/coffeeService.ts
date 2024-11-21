@@ -142,9 +142,13 @@ export class CoffeeService {
   ): Prisma.CoffeeOrderByWithRelationInput {
     if (filters.sortBy === "name") {
       return { name: filters.sortOrder || "asc" };
-    } else if (filters.sortBy === "salePrice") {
+    } else if (filters.sortBy === "price") {
       return { salePrice: filters.sortOrder || "asc" };
     }
     return {};
   }
 }
+
+export type GetAllCoffeeResult = Prisma.PromiseReturnType<
+  CoffeeService["getAllCoffees"]
+>;
