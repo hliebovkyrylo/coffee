@@ -55,8 +55,7 @@ export class CoffeeService {
           );
 
           const totalAmount = processedItems.reduce(
-            (acc, { coffee, item }) =>
-              acc + coffee.purchasePrice * item.quantity,
+            (acc, { coffee, item }) => acc + coffee.salePrice * item.quantity,
             0
           );
 
@@ -74,7 +73,7 @@ export class CoffeeService {
             name: coffee.name,
             imageUrl: coffee.imageUrl,
             quantity: item.quantity,
-            price: coffee.purchasePrice,
+            price: coffee.salePrice,
           }));
 
           return { totalAmount, purchasedItems: purchasedCoffees };
