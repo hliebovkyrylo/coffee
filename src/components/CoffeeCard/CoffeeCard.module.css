@@ -6,6 +6,8 @@
   font-family: Arial, sans-serif;
   position: relative;
   background-color: #fff;
+  display: flex;
+  flex-direction: column;
 }
 
 .productTag {
@@ -22,10 +24,13 @@
 .productImage {
   width: 100%;
   max-height: 400px;
+  object-fit: cover;
 }
 
 .productDetails {
   padding: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .productName {
@@ -69,4 +74,65 @@
 
 .addToCart:hover {
   background-color: #333;
+}
+
+@media (max-width: 768px) {
+  .productCard {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .productDetails {
+    padding: 10px;
+    text-align: center;
+  }
+
+  .productFooter {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .productName {
+    font-size: 16px;
+  }
+
+  .productRoast, .flavorProfile {
+    font-size: 13px;
+  }
+
+  .price {
+    font-size: 16px;
+  }
+
+  .addToCart {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .productCard {
+    padding: 10px;
+  }
+
+  .productImage {
+    max-height: 300px;
+  }
+
+  .productName {
+    font-size: 14px;
+  }
+
+  .productRoast, .flavorProfile {
+    font-size: 12px;
+  }
+
+  .price {
+    font-size: 14px;
+  }
+
+  .addToCart {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
 }
